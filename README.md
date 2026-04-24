@@ -1,6 +1,8 @@
-# rutvik.dev
+# rutvik-site
 
-Personal portfolio — Next.js 14 + Tailwind, grainy-editorial-gradient aesthetic.
+Personal site for Rutvik Gupta — Next.js 14 + Tailwind, grainy-editorial-gradient aesthetic.
+
+**Live:** https://rutvik-gupta.vercel.app
 
 ## Dev
 
@@ -9,6 +11,10 @@ npm install
 npm run dev
 # → http://localhost:3000
 ```
+
+## Deploy
+
+Hosted on Vercel. Pushes to `main` auto-deploy via the Vercel GitHub integration.
 
 ## Structure
 
@@ -56,5 +62,4 @@ lib/
   (salmon, green, gold, blue, red, violet) so borders, hover states, and
   animation strokes all inherit the role's color.
 
-See `DEPLOY.md` for Vercel deployment instructions.
 See `design-directions.md` for the research that led here.
