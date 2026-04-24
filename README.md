@@ -2,7 +2,7 @@
 
 Personal site for Rutvik Gupta — Next.js 14 + Tailwind, grainy-editorial-gradient aesthetic.
 
-**Live:** https://rutvik-gupta.vercel.app
+**Live:** https://kivtur.vercel.app
 
 ## Dev
 
