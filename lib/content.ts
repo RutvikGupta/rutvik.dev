@@ -73,7 +73,7 @@ export const journey: JourneyItem[] = [
     highlight: {
       title: "the machinery",
       description:
-        "Gemini 2.5 Flash Lite classifies each incoming message in ~400ms across languages, spelling variants, and emojis. A hand-tuned Unicode regex takes over when Gemini 429s or the API blips, so the bot never goes silent. Runs 24/7 on a GCP e2-micro in the always-free tier, with systemd + cgroup caps keeping Chromium under a gigabyte of RAM. Total cost: $0/month. My dad doesn’t know it’s a bot.",
+        "Gemini 2.5 Flash Lite classifies each incoming message in ~400ms across languages, spelling variants, and emojis. A hand-tuned Unicode regex takes over when Gemini 429s or the API blips, so the bot never goes silent. Runs 24/7 on a GCP e2-micro in the always-free tier, with systemd + cgroup caps keeping Chromium under a gigabyte of RAM. Total cost: $0/month.",
     },
     stack: ["node.js", "gemini-2.5", "puppeteer", "systemd", "gcp"],
     hasPreview: "whatsapp",
