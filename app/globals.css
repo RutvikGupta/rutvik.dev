@@ -1,0 +1,449 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #050608;
+  --color-bg-subtle: #0b0d14;
+  --color-bg-panel: #0f131e;
+  --color-fg: #f4f5fa;
+  --color-fg-muted: #a7aec6;
+  --color-muted: #6d7590;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.16);
+
+  --accent-orange: #ff9151;
+  --accent-red: #ff5a3c;
+  --accent-teal: #5ddbc2;
+  --accent-yellow: #ffc16b;
+
+  --entry-accent: var(--accent-orange);
+
+  --mx: 50vw;
+  --my: 50vh;
+  --cursor-opacity: 0.2;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Global grain — the PORTFOLIO–GO reference has a very subtle all-over grain
+   that sits above the gradient blobs but below content. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+}
+
+::selection {
+  background: rgba(255, 145, 81, 0.42);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 1px solid rgba(255, 145, 81, 0.8);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.42rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  transition:
+    border-color 260ms ease,
+    color 260ms ease,
+    background-color 260ms ease;
+}
+
+.tag:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  color: var(--color-fg);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ------------------------------------------------------------------
+   HERO — big grainy gradient blob + massive mixed-weight headline
+   ------------------------------------------------------------------ */
+
+.hero-blob {
+  position: absolute;
+  inset: -4rem 0 0 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-blob-core,
+.hero-blob-warm,
+.hero-blob-cool {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px) saturate(1.35);
+  will-change: transform;
+}
+
+.hero-blob-core {
+  top: -40%;
+  left: -10%;
+  width: 120%;
+  height: 95%;
+  background:
+    radial-gradient(circle at 30% 55%, rgba(255, 115, 55, 0.62), transparent 46%),
+    radial-gradient(circle at 55% 62%, rgba(255, 185, 90, 0.38), transparent 52%),
+    radial-gradient(circle at 75% 52%, rgba(255, 90, 60, 0.44), transparent 50%);
+  animation: heroBlobA 24s ease-in-out infinite alternate;
+}
+
+.hero-blob-warm {
+  top: -12%;
+  right: -18%;
+  width: 70%;
+  height: 70%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 140, 70, 0.28), transparent 58%);
+  animation: heroBlobB 28s ease-in-out infinite alternate;
+}
+
+.hero-blob-cool {
+  top: 18%;
+  left: -12%;
+  width: 70%;
+  height: 70%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(90, 210, 200, 0.22), transparent 60%);
+  animation: heroBlobC 30s ease-in-out infinite alternate;
+}
+
+.hero-blob-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+.hero-blob-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, var(--color-bg) 96%);
+  pointer-events: none;
+}
+
+@keyframes heroBlobA {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(3%, 4%, 0) scale(1.06); }
+}
+
+@keyframes heroBlobB {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-4%, 3%, 0) scale(1.08); }
+}
+
+@keyframes heroBlobC {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(5%, -3%, 0) scale(1.1); }
+}
+
+.hero-headline {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 13vw, 11rem);
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+  color: #fff;
+  text-shadow: 0 10px 60px rgba(0, 0, 0, 0.45);
+}
+
+.hero-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.74);
+  letter-spacing: -0.05em;
+}
+
+.hero-ampersand {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0;
+}
+
+/* ------------------------------------------------------------------
+   SITE BACKDROP — used behind content below the hero; kept quiet.
+   ------------------------------------------------------------------ */
+
+.site-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--color-bg);
+}
+
+.site-backdrop-glow-a,
+.site-backdrop-glow-b {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.site-backdrop-glow-a {
+  top: 48%;
+  left: -10%;
+  width: 40rem;
+  height: 40rem;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 120, 60, 0.16), transparent 68%);
+  animation: backdropFloatA 32s ease-in-out infinite alternate;
+}
+
+.site-backdrop-glow-b {
+  bottom: -10%;
+  right: -6%;
+  width: 44rem;
+  height: 44rem;
+  background: radial-gradient(circle at 50% 50%, rgba(89, 219, 210, 0.12), transparent 70%);
+  animation: backdropFloatB 36s ease-in-out infinite alternate;
+}
+
+.site-backdrop-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 20%, transparent 48%, rgba(3, 4, 6, 0.36) 100%),
+    linear-gradient(180deg, rgba(3, 4, 6, 0) 60%, rgba(3, 4, 6, 0.4) 100%);
+}
+
+@keyframes backdropFloatA {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(6%, -4%, 0); }
+}
+
+@keyframes backdropFloatB {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-5%, 5%, 0); }
+}
+
+/* Dad Bot classifier dot pulse used inside a foreignObject. */
+@keyframes dadbot-dot-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+/* Hover tooltip on the experience timeline — quick upward fade+rise. */
+@keyframes timeline-tooltip {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Staged 6s fade cycle for the Dad Bot chat — incoming first, then chip,
+   then reply, all fade out together so the greeting swap at t=0 of the
+   next cycle is visually silent. */
+@keyframes dadbot-incoming {
+  0%, 100%    { opacity: 0; }
+  10%, 85%    { opacity: 1; }
+}
+@keyframes dadbot-chip {
+  0%, 18%, 100% { opacity: 0; }
+  28%, 85%      { opacity: 1; }
+}
+@keyframes dadbot-reply {
+  0%, 36%, 100% { opacity: 0; }
+  46%, 85%      { opacity: 1; }
+}
+
+/* ------------------------------------------------------------------
+   CURSOR SPOTLIGHT — subtle ambient bloom following the pointer.
+   Mix-blend-mode screen lets the warm palette tint whatever's underneath
+   without feeling like a hard light.
+   ------------------------------------------------------------------ */
+
+.gradient-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: var(--cursor-opacity);
+  background:
+    radial-gradient(820px circle at var(--mx) var(--my), rgba(255, 145, 81, 0.18), transparent 65%),
+    radial-gradient(1040px circle at calc(var(--mx) + 140px) calc(var(--my) - 110px), rgba(255, 180, 100, 0.1), transparent 70%),
+    radial-gradient(960px circle at calc(var(--mx) - 180px) calc(var(--my) + 140px), rgba(89, 219, 210, 0.08), transparent 72%);
+  filter: blur(44px) saturate(1.05);
+  mix-blend-mode: screen;
+  transition: opacity 260ms ease;
+}
+
+/* ------------------------------------------------------------------
+   JOURNEY CARDS
+   ------------------------------------------------------------------ */
+
+.journey-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.008));
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition:
+    border-color 400ms ease,
+    box-shadow 400ms ease;
+}
+
+.journey-card[data-active="true"] {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 24px 100px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 0 1px color-mix(in srgb, var(--entry-accent) 18%, transparent);
+}
+
+.journey-preview-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 10, 16, 0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 16px 60px rgba(0, 0, 0, 0.28);
+}
+
+/* The outer black viewport that every preview scene sits inside. Width is
+   fluid; aspect-ratio keeps the box consistent and guarantees scenes never
+   spill outside their container regardless of breakpoint. */
+.preview-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #0a0c14, #07080d);
+}
+
+.preview-frame svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.preview-caption {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono, ui-monospace);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(239, 242, 255, 0.38);
+}
+
+.preview-caption-bottom {
+  top: auto;
+  bottom: 1rem;
+}
+
+/* ------------------------------------------------------------------
+   SECTION HEADING
+   ------------------------------------------------------------------ */
+
+.section-number {
+  font-family: var(--font-mono, ui-monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-muted);
+}
+
+.section-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4.6vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: var(--color-fg);
+}
+
+/* ------------------------------------------------------------------
+   REDUCED MOTION
+   ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob-core,
+  .hero-blob-warm,
+  .hero-blob-cool,
+  .site-backdrop-glow-a,
+  .site-backdrop-glow-b,
+  [data-preview-anim] {
+    animation: none !important;
+    transform: none !important;
+  }
+  .gradient-cursor {
+    opacity: 0 !important;
+  }
+}
