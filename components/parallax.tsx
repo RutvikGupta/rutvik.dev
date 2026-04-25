@@ -24,13 +24,34 @@ type ParallaxProps = {
 };
 
 /**
- * Scroll-driven parallax + optional cursor-driven 3D tilt. The scroll
- * component animates translateY over the element's viewport lifetime; the
- * tilt component rotates the element around its center based on the
- * pointer's normalized position. Both are spring-smoothed so motion feels
- * organic rather than direct.
+ * Public wrapper. Decides whether to mount the framer-motion impl at all.
+ *
+ * Originally the touch check lived inside the impl as a state flag, but the
+ * useScroll/useSpring/useTransform hooks still ran every render and reacted
+ * to scroll events even when their motion values weren't bound to the DOM.
+ * That wasted JS per scroll across all twelve Parallax instances on the
+ * page — enough to keep mobile feeling laggy.
+ *
+ * Splitting wrapper from impl means the impl's hooks are never instantiated
+ * on touch devices or under prefers-reduced-motion.
  */
-export function Parallax({
+export function Parallax(props: ParallaxProps) {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const touch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    setEnabled(!reduced && !touch);
+  }, []);
+
+  if (!enabled) {
+    return <div className={props.className}>{props.children}</div>;
+  }
+
+  return <ParallaxImpl {...props} />;
+}
+
+function ParallaxImpl({
   children,
   distance = 60,
   tilt = 0,
@@ -38,17 +59,6 @@ export function Parallax({
 }: ParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  // On touch devices the cursor-tilt is meaningless, and the scroll
-  // parallax adds non-trivial framer-motion work per card (six cards × two
-  // Parallaxes = twelve scroll/spring chains). Disable both on touch.
-  const [isTouch, setIsTouch] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia("(hover: none) and (pointer: coarse)");
-    const sync = () => setIsTouch(mql.matches);
-    sync();
-    mql.addEventListener?.("change", sync);
-    return () => mql.removeEventListener?.("change", sync);
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -73,7 +83,7 @@ export function Parallax({
   const springRY = useSpring(rotateY, { stiffness: 90, damping: 18, mass: 0.25 });
 
   useEffect(() => {
-    if (!ref.current || tilt === 0 || isTouch) return;
+    if (!ref.current || tilt === 0) return;
     const el = ref.current;
     const handle = (e: PointerEvent) => {
       const rect = el.getBoundingClientRect();
@@ -92,9 +102,9 @@ export function Parallax({
       el.removeEventListener("pointermove", handle);
       el.removeEventListener("pointerleave", reset);
     };
-  }, [tilt, tx, ty, isTouch]);
+  }, [tilt, tx, ty]);
 
-  if (prefersReducedMotion || isTouch) {
+  if (prefersReducedMotion) {
     return (
       <div ref={ref} className={className}>
         {children}

@@ -180,13 +180,18 @@ export default function Home() {
                   </p>
                   <a
                     href="mailto:rutvikragupta@gmail.com"
-                    className="group/mail mt-8 inline-flex items-center gap-4 text-[32px] font-semibold leading-none tracking-[-0.06em] text-white transition-colors hover:text-white/84 md:text-[56px]"
+                    className="group/mail mt-8 inline-flex max-w-full flex-wrap items-center gap-3 break-all text-[20px] font-semibold leading-none tracking-[-0.045em] text-white transition-colors hover:text-white/84 sm:gap-4 sm:break-normal sm:text-[28px] sm:tracking-[-0.06em] md:text-[56px]"
                   >
                     rutvikragupta@gmail.com
                     <ArrowRight
+                      size={20}
+                      strokeWidth={1.4}
+                      className="transition-transform group-hover/mail:translate-x-1 sm:hidden"
+                    />
+                    <ArrowRight
                       size={28}
                       strokeWidth={1.4}
-                      className="transition-transform group-hover/mail:translate-x-1"
+                      className="hidden transition-transform group-hover/mail:translate-x-1 sm:block"
                     />
                   </a>
                 </div>

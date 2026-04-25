@@ -85,7 +85,7 @@ export function JourneyEntry({
       id={item.slug}
       ref={ref}
       data-active={isActive ? "true" : "false"}
-      className="journey-card group relative overflow-hidden rounded-[36px] border border-white/10 p-6 md:p-8 lg:min-h-[82vh] lg:p-10"
+      className="journey-card group relative overflow-hidden rounded-[28px] border border-white/10 p-5 md:rounded-[36px] md:p-8 lg:min-h-[82vh] lg:p-10"
       style={{
         opacity: hasRevealed ? (isActive ? 1 : 0.95) : 0,
         transform: hasRevealed ? "translateY(0)" : "translateY(48px)",
@@ -113,7 +113,7 @@ export function JourneyEntry({
           }`}
         >
           <Parallax distance={14} tilt={4}>
-            <div className="journey-preview-shell p-4 md:p-5">
+            <div className="journey-preview-shell p-3 md:p-5">
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div>
                   <div className="label" style={{ color: accent }}>
@@ -163,7 +163,7 @@ export function JourneyEntry({
             <span className="h-px flex-1 bg-white/10" />
           </div>
 
-          <h3 className="max-w-2xl text-[34px] font-semibold leading-[0.92] tracking-[-0.07em] text-fg md:text-[52px]">
+          <h3 className="max-w-2xl text-[26px] font-semibold leading-[0.95] tracking-[-0.055em] text-fg sm:text-[34px] sm:leading-[0.92] sm:tracking-[-0.07em] md:text-[52px]">
             {item.title}
           </h3>
 
@@ -190,7 +190,7 @@ export function JourneyEntry({
               <div className="label mb-3" style={{ color: accent }}>
                 Featured work
               </div>
-              <h4 className="text-[22px] font-semibold leading-none tracking-[-0.05em] text-fg md:text-[28px]">
+              <h4 className="text-[18px] font-semibold leading-tight tracking-[-0.04em] text-fg sm:text-[22px] sm:leading-none sm:tracking-[-0.05em] md:text-[28px]">
                 {item.highlight.title.replace(/_/g, " ")}
               </h4>
               <p className="mt-4 text-[14px] leading-7 text-fg-muted/95 md:text-[15px]">
