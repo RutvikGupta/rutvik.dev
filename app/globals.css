@@ -490,9 +490,19 @@ a {
 }
 
 /* Touch devices — no cursor, so the pointer bloom is pure overhead.
-   Hidden via display:none so it never composites or paints. */
+   Hidden via display:none so it never composites or paints. Plus, the
+   site should "load once" on phones — no scroll-triggered reveals,
+   parallax, or activate/inactive opacity flicker. !important wins over
+   React's inline styles so the first paint is already revealed. */
 @media (hover: none) and (pointer: coarse) {
   .gradient-cursor {
     display: none !important;
+  }
+  [data-reveal],
+  .journey-card {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
   }
 }

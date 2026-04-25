@@ -31,8 +31,11 @@ export function Reveal({
   useEffect(() => {
     if (!ref.current) return;
 
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mediaQuery.matches) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // On touch devices we kill scroll-triggered reveals entirely — the
+    // page should render once, no progressive fade-ins.
+    const touch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    if (reduced || touch) {
       setVisible(true);
       return;
     }
@@ -83,6 +86,7 @@ export function Reveal({
   return (
     <div
       ref={ref}
+      data-reveal=""
       style={{
         ...(visible ? visibleStyle : hiddenStyle),
         transition:

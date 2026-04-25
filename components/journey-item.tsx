@@ -46,6 +46,13 @@ export function JourneyEntry({
 
   useEffect(() => {
     if (!ref.current) return;
+    // Kill scroll-driven activate/reveal on touch — the card should be
+    // fully rendered from the first paint, no progressive animations.
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      setIsActive(true);
+      setHasRevealed(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -58,26 +65,26 @@ export function JourneyEntry({
     );
 
     observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
 
-  // One-shot reveal — slide up + fade in the first time the card enters
-  // the viewport. Triggers once and disconnects, so transform never updates
-  // on subsequent scroll events (no collision with the Parallax transforms
-  // inside the card).
-  useEffect(() => {
-    if (!ref.current) return;
-    const obs = new IntersectionObserver(
+    // One-shot reveal — slide up + fade in the first time the card enters
+    // the viewport. Triggers once and disconnects, so transform never
+    // updates on subsequent scroll events (no collision with the Parallax
+    // transforms inside the card).
+    const revealObs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setHasRevealed(true);
-          obs.disconnect();
+          revealObs.disconnect();
         }
       },
       { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
     );
-    obs.observe(ref.current);
-    return () => obs.disconnect();
+    revealObs.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+      revealObs.disconnect();
+    };
   }, []);
 
   return (
