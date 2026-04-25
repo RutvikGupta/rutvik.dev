@@ -417,6 +417,15 @@ a {
     filter: blur(56px) !important;
     opacity: 0.7;
   }
+  /* Preview captions sit at fixed 1rem offsets from the frame edges, but
+     SVG content scales with the frame and ends up crowding those zones on
+     phone (Smarts arrows at viewBox y=172 → ~y=141 in a 164px-tall mobile
+     frame; UTSC bottom hidden node at y=168 → ~y=138). The captions are
+     also barely readable at the scaled-down font size. Hide them on mobile
+     so the SVGs have a clean surface to render against. */
+  .preview-caption {
+    display: none;
+  }
 }
 
 /* Touch devices — no cursor, so the pointer bloom is pure overhead.
