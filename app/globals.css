@@ -123,45 +123,22 @@ a {
   z-index: 0;
 }
 
-.hero-blob-core,
-.hero-blob-warm,
-.hero-blob-cool {
+/* Baked SVG texture — replaces three stacked blur(90px) layers. The blur
+   and saturate are done once inside the SVG (`feGaussianBlur` +
+   `feColorMatrix`); after first paint the browser caches the rasterized
+   bitmap and just samples it. The slow drift is a compositor-only
+   translate keyframe — no re-paint, no re-rasterize. */
+.hero-blob-img {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(90px) saturate(1.35);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  user-select: none;
+  pointer-events: none;
+  animation: heroBlobDrift 90s ease-in-out infinite alternate;
   will-change: transform;
-}
-
-.hero-blob-core {
-  top: -40%;
-  left: -10%;
-  width: 120%;
-  height: 95%;
-  background:
-    radial-gradient(circle at 30% 55%, rgba(255, 115, 55, 0.62), transparent 46%),
-    radial-gradient(circle at 55% 62%, rgba(255, 185, 90, 0.38), transparent 52%),
-    radial-gradient(circle at 75% 52%, rgba(255, 90, 60, 0.44), transparent 50%);
-  animation: heroBlobA 24s ease-in-out infinite alternate;
-}
-
-.hero-blob-warm {
-  top: -12%;
-  right: -18%;
-  width: 70%;
-  height: 70%;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255, 140, 70, 0.28), transparent 58%);
-  animation: heroBlobB 28s ease-in-out infinite alternate;
-}
-
-.hero-blob-cool {
-  top: 18%;
-  left: -12%;
-  width: 70%;
-  height: 70%;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(90, 210, 200, 0.22), transparent 60%);
-  animation: heroBlobC 30s ease-in-out infinite alternate;
 }
 
 .hero-blob-grain {
@@ -181,19 +158,9 @@ a {
   pointer-events: none;
 }
 
-@keyframes heroBlobA {
+@keyframes heroBlobDrift {
   0% { transform: translate3d(0, 0, 0) scale(1); }
-  100% { transform: translate3d(3%, 4%, 0) scale(1.06); }
-}
-
-@keyframes heroBlobB {
-  0% { transform: translate3d(0, 0, 0) scale(1); }
-  100% { transform: translate3d(-4%, 3%, 0) scale(1.08); }
-}
-
-@keyframes heroBlobC {
-  0% { transform: translate3d(0, 0, 0) scale(1); }
-  100% { transform: translate3d(5%, -3%, 0) scale(1.1); }
+  100% { transform: translate3d(2%, 1.5%, 0) scale(1.04); }
 }
 
 .hero-headline {
@@ -235,31 +202,20 @@ a {
   background: var(--color-bg);
 }
 
-.site-backdrop-glow-a,
-.site-backdrop-glow-b {
+/* Baked backdrop glows — same pattern as the hero blob: SVG with
+   feGaussianBlur, blurred once, cached, drifted with a cheap
+   compositor-only translate. */
+.site-backdrop-img {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(140px);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0.55;
+  user-select: none;
+  pointer-events: none;
+  animation: backdropDrift 120s ease-in-out infinite alternate;
   will-change: transform;
-}
-
-.site-backdrop-glow-a {
-  top: 48%;
-  left: -10%;
-  width: 40rem;
-  height: 40rem;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 120, 60, 0.16), transparent 68%);
-  animation: backdropFloatA 32s ease-in-out infinite alternate;
-}
-
-.site-backdrop-glow-b {
-  bottom: -10%;
-  right: -6%;
-  width: 44rem;
-  height: 44rem;
-  background: radial-gradient(circle at 50% 50%, rgba(89, 219, 210, 0.12), transparent 70%);
-  animation: backdropFloatB 36s ease-in-out infinite alternate;
 }
 
 .site-backdrop-vignette {
@@ -270,14 +226,9 @@ a {
     linear-gradient(180deg, rgba(3, 4, 6, 0) 60%, rgba(3, 4, 6, 0.4) 100%);
 }
 
-@keyframes backdropFloatA {
+@keyframes backdropDrift {
   0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(6%, -4%, 0); }
-}
-
-@keyframes backdropFloatB {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-5%, 5%, 0); }
+  100% { transform: translate3d(2.5%, -1.5%, 0); }
 }
 
 /* Dad Bot classifier dot pulse used inside a foreignObject. */
@@ -434,11 +385,8 @@ a {
    ------------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-blob-core,
-  .hero-blob-warm,
-  .hero-blob-cool,
-  .site-backdrop-glow-a,
-  .site-backdrop-glow-b,
+  .hero-blob-img,
+  .site-backdrop-img,
   [data-preview-anim] {
     animation: none !important;
     transform: none !important;
@@ -449,30 +397,12 @@ a {
 }
 
 /* ------------------------------------------------------------------
-   MOBILE — heavy filters and infinite compositing animations cripple
-   phone GPUs. On narrow viewports we stop the blob/backdrop float
-   animations, halve the blur radii, drop the body grain, and hide the
-   pointer-bloom (which is meaningless without a cursor anyway).
+   MOBILE — the hero/backdrop blurs are now baked into static SVGs, so
+   the heavy live-filter gates from earlier iterations are gone. What
+   remains is keeping the body grain (mix-blend-mode is still expensive
+   to re-blend on scroll) and the journey-card accent dots in check.
    ------------------------------------------------------------------ */
 @media (max-width: 768px) {
-  .hero-blob-core,
-  .hero-blob-warm,
-  .hero-blob-cool,
-  .site-backdrop-glow-a,
-  .site-backdrop-glow-b {
-    animation: none !important;
-    transform: none !important;
-  }
-  .hero-blob-core,
-  .hero-blob-warm,
-  .hero-blob-cool {
-    filter: blur(48px) saturate(1.2);
-  }
-  .site-backdrop-glow-a,
-  .site-backdrop-glow-b {
-    filter: blur(70px);
-    opacity: 0.4;
-  }
   .hero-blob-grain {
     opacity: 0.32;
     background-size: 140px 140px;
@@ -481,7 +411,7 @@ a {
     opacity: 0.12;
     background-size: 160px 160px;
   }
-  /* Each journey card had two `blur(120px)` accent dots — six cards meant
+  /* Each journey card has two `blur(120px)` accent dots — six cards meant
      ~12 of these stacked. Halve the blur on mobile so the GPU can breathe. */
   .journey-card > [class*="blur-["] {
     filter: blur(56px) !important;

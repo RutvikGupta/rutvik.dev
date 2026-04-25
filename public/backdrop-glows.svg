@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <radialGradient id="ga" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgb(255,120,60)" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="rgb(255,120,60)" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gb" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgb(89,219,210)" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="rgb(89,219,210)" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="140"/>
+    </filter>
+  </defs>
+  <g filter="url(#blur)">
+    <circle cx="-80" cy="600" r="500" fill="url(#ga)"/>
+    <circle cx="1620" cy="1100" r="540" fill="url(#gb)"/>
+  </g>
+</svg>
