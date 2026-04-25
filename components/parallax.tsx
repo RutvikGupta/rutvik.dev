@@ -8,7 +8,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 type ParallaxProps = {
   children: ReactNode;
@@ -38,6 +38,17 @@ export function Parallax({
 }: ParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  // On touch devices the cursor-tilt is meaningless, and the scroll
+  // parallax adds non-trivial framer-motion work per card (six cards × two
+  // Parallaxes = twelve scroll/spring chains). Disable both on touch.
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(hover: none) and (pointer: coarse)");
+    const sync = () => setIsTouch(mql.matches);
+    sync();
+    mql.addEventListener?.("change", sync);
+    return () => mql.removeEventListener?.("change", sync);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -62,7 +73,7 @@ export function Parallax({
   const springRY = useSpring(rotateY, { stiffness: 90, damping: 18, mass: 0.25 });
 
   useEffect(() => {
-    if (!ref.current || tilt === 0) return;
+    if (!ref.current || tilt === 0 || isTouch) return;
     const el = ref.current;
     const handle = (e: PointerEvent) => {
       const rect = el.getBoundingClientRect();
@@ -81,9 +92,9 @@ export function Parallax({
       el.removeEventListener("pointermove", handle);
       el.removeEventListener("pointerleave", reset);
     };
-  }, [tilt, tx, ty]);
+  }, [tilt, tx, ty, isTouch]);
 
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion || isTouch) {
     return (
       <div ref={ref} className={className}>
         {children}

@@ -42,7 +42,7 @@ export default function Home() {
         {/* HERO */}
         <section
           id="intro"
-          className="relative mx-auto flex min-h-[92vh] max-w-[1400px] flex-col justify-between px-6 pb-10 pt-8 md:px-10 md:pb-14 md:pt-4"
+          className="relative mx-auto flex min-h-[92dvh] max-w-[1400px] flex-col justify-between px-6 pb-10 pt-8 md:px-10 md:pb-14 md:pt-4"
         >
           <HeroStage />
 

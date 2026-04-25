@@ -9,6 +9,16 @@ import { useEffect } from "react";
  */
 export function Spotlight() {
   useEffect(() => {
+    // Touch devices don't have a cursor, so the pointer bloom is invisible
+    // overhead — and the rAF tick + pointermove listener was contributing
+    // to mobile scroll jank. Bail before allocating anything.
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches
+    ) {
+      return;
+    }
+
     const root = document.documentElement;
     let targetX = window.innerWidth / 2;
     let targetY = window.innerHeight / 2;

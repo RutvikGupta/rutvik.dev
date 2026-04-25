@@ -447,3 +447,52 @@ a {
     opacity: 0 !important;
   }
 }
+
+/* ------------------------------------------------------------------
+   MOBILE — heavy filters and infinite compositing animations cripple
+   phone GPUs. On narrow viewports we stop the blob/backdrop float
+   animations, halve the blur radii, drop the body grain, and hide the
+   pointer-bloom (which is meaningless without a cursor anyway).
+   ------------------------------------------------------------------ */
+@media (max-width: 768px) {
+  .hero-blob-core,
+  .hero-blob-warm,
+  .hero-blob-cool,
+  .site-backdrop-glow-a,
+  .site-backdrop-glow-b {
+    animation: none !important;
+    transform: none !important;
+  }
+  .hero-blob-core,
+  .hero-blob-warm,
+  .hero-blob-cool {
+    filter: blur(48px) saturate(1.2);
+  }
+  .site-backdrop-glow-a,
+  .site-backdrop-glow-b {
+    filter: blur(70px);
+    opacity: 0.4;
+  }
+  .hero-blob-grain {
+    opacity: 0.32;
+    background-size: 140px 140px;
+  }
+  body::before {
+    opacity: 0.12;
+    background-size: 160px 160px;
+  }
+  /* Each journey card had two `blur(120px)` accent dots — six cards meant
+     ~12 of these stacked. Halve the blur on mobile so the GPU can breathe. */
+  .journey-card > [class*="blur-["] {
+    filter: blur(56px) !important;
+    opacity: 0.7;
+  }
+}
+
+/* Touch devices — no cursor, so the pointer bloom is pure overhead.
+   Hidden via display:none so it never composites or paints. */
+@media (hover: none) and (pointer: coarse) {
+  .gradient-cursor {
+    display: none !important;
+  }
+}
