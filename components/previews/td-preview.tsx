@@ -128,11 +128,11 @@ export function TDPreview() {
             y="162"
             dominantBaseline="central"
             fontFamily="ui-monospace, monospace"
-            fontSize="9"
-            letterSpacing="0.1em"
+            fontSize="8.5"
+            letterSpacing="0.08em"
             fill="rgba(239,242,255,0.8)"
           >
-            TD-4218 · LEDGER LATENCY SPIKE
+            TD-4218 · LEDGER LATENCY
           </text>
 
           {/* NOTIFIED pill, right-aligned */}
