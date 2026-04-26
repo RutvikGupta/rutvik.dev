@@ -403,13 +403,15 @@ a {
    to re-blend on scroll) and the journey-card accent dots in check.
    ------------------------------------------------------------------ */
 @media (max-width: 768px) {
-  .hero-blob-grain {
-    opacity: 0.32;
-    background-size: 140px 140px;
-  }
+  /* Both grains use `mix-blend-mode: overlay` which forces the compositor
+     to re-blend the entire stack on every paint, including every scroll
+     frame. With everything else baked into cached textures this was the
+     last expensive per-frame op left on phones. The grain is mostly
+     atmosphere — invisible at low opacity on a phone-sized screen — so
+     hiding it outright is the cheapest fix. */
+  .hero-blob-grain,
   body::before {
-    opacity: 0.12;
-    background-size: 160px 160px;
+    display: none !important;
   }
   /* Each journey card has two `blur(120px)` accent dots — six cards meant
      ~12 of these stacked. Halve the blur on mobile so the GPU can breathe. */
