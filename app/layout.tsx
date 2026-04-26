@@ -64,6 +64,23 @@ export default function RootLayout({
       lang="en"
       className={`${aspekta.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        {/* Above-the-fold textures — preload so the browser fetches them
+            in parallel with HTML parsing instead of waiting for CSS to
+            discover them via background-image / img src. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/hero-blob.svg"
+          type="image/svg+xml"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/backdrop-glows.svg"
+          type="image/svg+xml"
+        />
+      </head>
       <body>
         <GrainyGradientBackdrop />
         <Spotlight />
