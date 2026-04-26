@@ -15,11 +15,14 @@
 export function HeroStage() {
   return (
     <div aria-hidden="true" className="hero-blob">
-      {/* Plain <img> intentional — next/image's optimizer doesn't help with
-          SVGs and its wrapper div fights with inset:0 absolute positioning. */}
+      {/* Pre-baked WebP (rasterized from public/hero-blob.svg via
+          scripts/bake-textures.mjs). The SVG version had `feGaussianBlur`
+          which the browser re-executes when the rasterization scale
+          changes — visible as a tear when zooming. The WebP is just a
+          bitmap; the browser samples it at any scale, no filter to run. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/hero-blob.svg"
+        src="/hero-blob.webp"
         alt=""
         className="hero-blob-img"
         loading="eager"

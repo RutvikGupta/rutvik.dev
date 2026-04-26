@@ -71,14 +71,14 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/hero-blob.svg"
-          type="image/svg+xml"
+          href="/hero-blob.webp"
+          type="image/webp"
         />
         <link
           rel="preload"
           as="image"
-          href="/backdrop-glows.svg"
-          type="image/svg+xml"
+          href="/backdrop-glows.webp"
+          type="image/webp"
         />
       </head>
       <body>

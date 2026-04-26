@@ -12,6 +12,8 @@ const nextConfig = {
       { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
     ];
     return [
+      { source: "/hero-blob.webp", headers: immutable },
+      { source: "/backdrop-glows.webp", headers: immutable },
       { source: "/hero-blob.svg", headers: immutable },
       { source: "/backdrop-glows.svg", headers: immutable },
       { source: "/icon.svg", headers: immutable },

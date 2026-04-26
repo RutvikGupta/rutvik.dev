@@ -299,6 +299,10 @@ a {
   transition:
     border-color 400ms ease,
     box-shadow 400ms ease;
+  /* Isolate per-card paint + layout. Repaints triggered by zoom, scroll,
+     or framer-motion springs stay inside the card and don't cascade
+     through the document. */
+  contain: layout paint;
 }
 
 .journey-card[data-active="true"] {
@@ -330,6 +334,9 @@ a {
   overflow: hidden;
   border-radius: 18px;
   background: linear-gradient(180deg, #0a0c14, #07080d);
+  /* Same containment story as .journey-card — keep the SVG animations'
+     re-paints inside the frame instead of bubbling up. */
+  contain: layout paint;
 }
 
 .preview-frame svg {

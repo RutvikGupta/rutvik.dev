@@ -8,10 +8,10 @@
 export function GrainyGradientBackdrop() {
   return (
     <div aria-hidden="true" className="site-backdrop">
-      {/* Plain <img> intentional — same rationale as HeroStage. */}
+      {/* Pre-baked WebP — see HeroStage for the rationale. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/backdrop-glows.svg"
+        src="/backdrop-glows.webp"
         alt=""
         className="site-backdrop-img"
         loading="eager"
