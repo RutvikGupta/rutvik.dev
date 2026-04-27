@@ -237,18 +237,6 @@ a {
   50%      { opacity: 1; }
 }
 
-/* Hover tooltip on the experience timeline — quick upward fade+rise. */
-@keyframes timeline-tooltip {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 4px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
 /* Staged 6s fade cycle for the Dad Bot chat — incoming first, then chip,
    then reply, all fade out together so the greeting swap at t=0 of the
    next cycle is visually silent. */

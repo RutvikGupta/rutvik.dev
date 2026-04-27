@@ -1,5 +1,4 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { ExperienceTimeline } from "@/components/experience-timeline";
 import { Header } from "@/components/header";
 import { HeroStage } from "@/components/hero-stage";
 import { JourneyEntry } from "@/components/journey-item";
@@ -15,11 +14,6 @@ const heroFacts = [
     label: "Now",
     value: "Fathom Health",
     detail: "Backend + data, LLM-driven medical coding",
-  },
-  {
-    label: "Shipping",
-    value: "5 years",
-    detail: "Since my first real codebase at Huawei in 2021",
   },
   {
     label: "Based",
@@ -59,13 +53,12 @@ export default function Home() {
 
             <div className="mt-8 grid gap-6 md:grid-cols-[minmax(0,26rem)_1fr] md:items-end md:gap-10">
               <p className="max-w-md text-[14px] leading-[1.6] text-white/72 md:text-[15px]">
-                I&apos;m a software engineer in Toronto. Right now I&apos;m at
-                Fathom Health, building LLM-driven infrastructure that
-                automates medical coding for US hospital networks — data
-                pipelines, AI inference, and the operational tooling around
-                both. Before that: payments at DraftKings, an internal status
-                page at TD, self-driving simulation at Huawei Noah&apos;s Ark,
-                and three years of cognitive-neuroscience research at UTSC.
+                Software engineer in Toronto. Right now at Fathom Health,
+                building LLM-driven infrastructure that automates medical
+                coding for US hospital networks. Before that: payments at
+                DraftKings, a status page at TD, self-driving sim at Huawei
+                Noah&apos;s Ark, and three years of cognitive-neuroscience
+                research at UTSC.
               </p>
 
               <div className="flex flex-wrap items-center gap-3 md:justify-end">
@@ -111,35 +104,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* JOURNEY — lightweight overview of the career arc. Hover a dot */}
-        {/* to pull the job title + company. Sits before the detailed cards */}
-        {/* so visitors can orient themselves before reading each chapter. */}
+        {/* WORK */}
         <section
-          id="timeline"
-          className="mx-auto max-w-[1400px] px-6 pt-20 md:px-10 md:pt-28"
+          id="journey"
+          className="mx-auto max-w-[1400px] px-6 pb-12 pt-20 md:px-10 md:pt-28"
         >
           <Reveal>
             <SectionHeading
               number="01"
-              label="Journey"
-              title="Journey."
-            />
-            <p className="max-w-xl text-[14px] leading-[1.6] text-white/56 md:text-[15px]">
-              Five roles, five years.
-            </p>
-          </Reveal>
-
-          <ExperienceTimeline />
-        </section>
-
-        {/* WORK */}
-        <section
-          id="journey"
-          className="mx-auto max-w-[1400px] px-6 pb-12 pt-10 md:px-10 md:pt-16"
-        >
-          <Reveal>
-            <SectionHeading
-              number="02"
               label="Work"
               title="What I’ve actually done."
             />
@@ -166,7 +138,7 @@ export default function Home() {
             className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-32"
           >
             <SectionHeading
-              number="03"
+              number="02"
               label="Contact"
               title="Say hi."
             />
@@ -175,8 +147,7 @@ export default function Home() {
               <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
                 <div>
                   <p className="max-w-xl text-[15px] leading-[1.7] text-white/68 md:text-[16px]">
-                    Open to new opportunities, collaborations, and roles —
-                    especially anything backend, data, or AI-adjacent.
+                    Open to backend, data, or AI-adjacent work.
                   </p>
                   <a
                     href="mailto:rutvikragupta@gmail.com"
