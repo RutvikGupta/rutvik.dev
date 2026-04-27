@@ -55,7 +55,7 @@ export const journey: JourneyItem[] = [
     orgUrl: "https://fathomhealth.co",
     location: "Toronto (remote)",
     blurb:
-      "Backend and data infra for LLM-driven medical coding. I own the chart-routing engine, adaptive scaling per hospital client, and the safeguards that keep bad model output off real bills.",
+      "Building LLM-driven infrastructure that automates medical coding for US hospital networks — shipping production systems across data pipelines, AI inference, and operational tooling.",
     stack: ["python", "airflow", "pyspark", "gcp", "bigquery", "dbt", "llms"],
     hasPreview: "fathom",
     theme: { accent: "#49e6d2", command: "fathom --route" },
