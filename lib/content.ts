@@ -38,7 +38,8 @@ export type JourneyItem = {
     | "smarts"
     | "draftkings"
     | "td"
-    | "utsc";
+    | "utsc"
+    | "lyra";
   featuredLink?: { label: string; href: string };
   theme: EntryTheme;
 };
@@ -81,7 +82,28 @@ export const journey: JourneyItem[] = [
     theme: { accent: "#9cc36b", command: "dadbot --watch" },
   },
 
-  // 3. DRAFTKINGS
+  // 3. LYRA — personal project (2026)
+  {
+    slug: "lyra",
+    kind: "project",
+    dates: "2026 · weekend",
+    title: "Lyra",
+    org: "Personal project",
+    orgUrl: "https://lyra00.vercel.app",
+    blurb:
+      "Turns Spotify listening into a 3D force-directed graph. Artists and tracks are nodes; edges link items sharing a Last.fm genre. Sign in, or upload the data-export ZIP for the multi-year view — the currently-playing track lights up its node in real time.",
+    highlight: {
+      title: "the constellation",
+      description:
+        "Three.js + d3-force-3d in WebGL, community detection for cluster coloring, a toggleable co-play overlay. Export ZIPs parse client-side via fflate into IndexedDB — millions of plays, no server upload. Anonymous visitors hit Vercel-Blob snapshots baked nightly, so the public view costs zero Spotify rate-limit budget.",
+    },
+    stack: ["next.js", "three.js", "d3-force-3d", "spotify api", "last.fm", "vercel blob"],
+    hasPreview: "lyra",
+    featuredLink: { label: "live", href: "https://lyra00.vercel.app" },
+    theme: { accent: "#e892b8", command: "lyra --listen" },
+  },
+
+  // 4. DRAFTKINGS
   {
     slug: "draftkings",
     kind: "role",

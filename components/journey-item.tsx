@@ -10,6 +10,7 @@ import { SmartsPreview } from "@/components/previews/smarts-preview";
 import { DraftKingsPreview } from "@/components/previews/draftkings-preview";
 import { TDPreview } from "@/components/previews/td-preview";
 import { UTSCPreview } from "@/components/previews/utsc-preview";
+import { LyraPreview } from "@/components/previews/lyra-preview";
 
 function PreviewFor({ kind }: { kind?: JourneyItem["hasPreview"] }) {
   switch (kind) {
@@ -25,6 +26,8 @@ function PreviewFor({ kind }: { kind?: JourneyItem["hasPreview"] }) {
       return <TDPreview />;
     case "utsc":
       return <UTSCPreview />;
+    case "lyra":
+      return <LyraPreview />;
     default:
       return null;
   }
