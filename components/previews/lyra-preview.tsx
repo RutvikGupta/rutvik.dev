@@ -92,17 +92,19 @@ export function LyraPreview() {
       </div>
 
       <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        {/* In-SVG "from spotify" mark. Lives inside the SVG (not the
-            HTML caption) because captions are display:none on mobile —
-            this label survives the small-screen render. */}
+        {/* In-SVG "from spotify" mark, anchored to the bottom-left.
+            Lives inside the SVG (not the HTML caption) because captions
+            are display:none on mobile — this label survives the
+            small-screen render. Bottom placement keeps it clear of the
+            top captions on desktop. */}
         <g>
           <polygon
-            points="14,16 14,28 24,22"
+            points="14,176 14,188 24,182"
             fill="rgba(127,212,126,0.85)"
           />
           <text
             x="32"
-            y="22"
+            y="182"
             dominantBaseline="central"
             fontFamily="ui-monospace, monospace"
             fontSize="9"
