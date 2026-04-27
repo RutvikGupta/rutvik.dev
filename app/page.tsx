@@ -85,7 +85,7 @@ export default function Home() {
 
           {/* Bio strip — not counters, just small facts. */}
           <div className="relative z-10 mt-10 border-t border-white/10 pt-6">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+            <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-8">
               {heroFacts.map((f) => (
                 <div key={f.label} className="flex flex-col gap-2">
                   <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/44">
