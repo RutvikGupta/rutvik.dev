@@ -217,20 +217,28 @@ export function JourneyEntry({
             ))}
           </ul>
 
-          {item.featuredLink ? (
-            <a
-              href={item.featuredLink.href}
-              target={item.featuredLink.href.startsWith("http") ? "_blank" : undefined}
-              rel={item.featuredLink.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="group/cta mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-4 py-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-white/78 transition-all hover:border-white/18 hover:bg-white/[0.06] hover:text-white"
-            >
-              {item.featuredLink.label}
-              <ArrowUpRight
-                size={14}
-                strokeWidth={1.4}
-                className="transition-transform group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-              />
-            </a>
+          {item.featuredLinks && item.featuredLinks.length > 0 ? (
+            <div className="mt-8 flex flex-wrap gap-3">
+              {item.featuredLinks.map((link) => {
+                const isExternal = link.href.startsWith("http");
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    className="group/cta inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-4 py-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-white/78 transition-all hover:border-white/18 hover:bg-white/[0.06] hover:text-white"
+                  >
+                    {link.label}
+                    <ArrowUpRight
+                      size={14}
+                      strokeWidth={1.4}
+                      className="transition-transform group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+                    />
+                  </a>
+                );
+              })}
+            </div>
           ) : null}
         </Parallax>
       </div>

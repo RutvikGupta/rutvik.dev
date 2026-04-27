@@ -40,7 +40,7 @@ export type JourneyItem = {
     | "td"
     | "utsc"
     | "lyra";
-  featuredLink?: { label: string; href: string };
+  featuredLinks?: Array<{ label: string; href: string }>;
   theme: EntryTheme;
 };
 
@@ -78,7 +78,10 @@ export const journey: JourneyItem[] = [
     },
     stack: ["next.js", "three.js", "d3-force-3d", "spotify api", "last.fm", "vercel blob"],
     hasPreview: "lyra",
-    featuredLink: { label: "live", href: "https://lyra00.vercel.app" },
+    featuredLinks: [
+      { label: "live", href: "https://lyra00.vercel.app" },
+      { label: "github", href: "https://github.com/RutvikGupta/lyra" },
+    ],
     theme: { accent: "#e892b8", command: "lyra --listen" },
   },
 
@@ -99,7 +102,7 @@ export const journey: JourneyItem[] = [
     },
     stack: ["node.js", "gemini-2.5", "puppeteer", "systemd", "gcp"],
     hasPreview: "whatsapp",
-    featuredLink: { label: "github", href: "https://github.com/RutvikGupta/dad-bot" },
+    featuredLinks: [{ label: "github", href: "https://github.com/RutvikGupta/dad-bot" }],
     theme: { accent: "#9cc36b", command: "dadbot --watch" },
   },
 
@@ -137,7 +140,7 @@ export const journey: JourneyItem[] = [
       "Core contributor to SMARTS — Noah’s Ark Lab’s open-source multi-agent RL simulator. Wrote a Python CLI for querying Waymo road networks across 100+ scenarios, and extended the SUMO Map API to ingest OpenDRIVE and Waymo too — so researchers outside SUMO-land could use the tool.",
     stack: ["python", "sumo", "waymo-open", "gh-actions"],
     hasPreview: "smarts",
-    featuredLink: { label: "github", href: "https://github.com/huawei-noah/SMARTS" },
+    featuredLinks: [{ label: "github", href: "https://github.com/huawei-noah/SMARTS" }],
     theme: { accent: "#74c6ff", command: "smarts --simulate" },
   },
 

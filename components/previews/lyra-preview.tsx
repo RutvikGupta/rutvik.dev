@@ -92,7 +92,31 @@ export function LyraPreview() {
       </div>
 
       <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        {/* edges first so nodes sit on top */}
+        {/* In-SVG "from spotify" mark. Lives inside the SVG (not the
+            HTML caption) because captions are display:none on mobile —
+            this label survives the small-screen render. */}
+        <g>
+          <polygon
+            points="14,16 14,28 24,22"
+            fill="rgba(127,212,126,0.85)"
+          />
+          <text
+            x="32"
+            y="22"
+            dominantBaseline="central"
+            fontFamily="ui-monospace, monospace"
+            fontSize="9"
+            fontWeight="700"
+            letterSpacing="0.22em"
+            fill="rgba(127,212,126,0.85)"
+          >
+            SPOTIFY
+          </text>
+        </g>
+
+        {/* edges first so nodes sit on top. Stroke bumped from 0.6 to
+            1.0 so the connecting lines stay visible on mobile after the
+            SVG scales down. */}
         {EDGES.map(([a, b], i) => (
           <line
             key={i}
@@ -100,18 +124,21 @@ export function LyraPreview() {
             y1={NODES[a].y}
             x2={NODES[b].x}
             y2={NODES[b].y}
-            stroke="rgba(255,255,255,0.12)"
-            strokeWidth="0.6"
+            stroke="rgba(255,255,255,0.16)"
+            strokeWidth="1"
           />
         ))}
 
-        {/* nodes with staggered breathing */}
+        {/* nodes with staggered breathing. Radii bumped (2.4 → 3.2 / 3.2
+            → 4.4) so the constellation reads well after mobile-scale
+            downsampling. Other previews use 5–35 unit shapes; this puts
+            Lyra in the same readable range. */}
         {NODES.map((n, i) => (
           <circle
             key={i}
             cx={n.x}
             cy={n.y}
-            r={i === livingIndex ? 3.2 : 2.4}
+            r={i === livingIndex ? 4.4 : 3.2}
             fill={CLUSTER_COLORS[n.cluster]}
             data-preview-anim
             style={{
@@ -129,26 +156,27 @@ export function LyraPreview() {
         ))}
 
         {/* now-playing halo — keyed on livingIndex so the ripple
-            restarts when the highlighted node changes */}
+            restarts when the highlighted node changes. Radii also bumped
+            for mobile readability. */}
         <g key={`halo-${livingIndex}`}>
           <circle
             cx={living.x}
             cy={living.y}
-            r="4"
+            r="5"
             fill="none"
             stroke={livingColor}
-            strokeWidth="1.1"
+            strokeWidth="1.4"
             data-preview-anim
           >
             <animate
               attributeName="r"
-              values="3.6;13;3.6"
+              values="4.5;17;4.5"
               dur="2.4s"
               repeatCount="indefinite"
             />
             <animate
               attributeName="opacity"
-              values="0.85;0;0.85"
+              values="0.9;0;0.9"
               dur="2.4s"
               repeatCount="indefinite"
             />
@@ -156,13 +184,13 @@ export function LyraPreview() {
           <circle
             cx={living.x}
             cy={living.y}
-            r="1.2"
+            r="1.8"
             fill={livingColor}
             data-preview-anim
           >
             <animate
               attributeName="r"
-              values="1;1.8;1"
+              values="1.4;2.4;1.4"
               dur="1.4s"
               repeatCount="indefinite"
             />
