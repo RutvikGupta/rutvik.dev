@@ -61,28 +61,7 @@ export const journey: JourneyItem[] = [
     theme: { accent: "#49e6d2", command: "fathom --route" },
   },
 
-  // 2. DAD BOT — personal project (2026)
-  {
-    slug: "dad-bot",
-    kind: "project",
-    dates: "2026 · weekend",
-    title: "Dad Bot",
-    org: "Personal project",
-    orgUrl: "https://github.com/RutvikGupta/dad-bot",
-    blurb:
-      "My dad texts me “good morning” every day — English, Hindi, sometimes a sunrise emoji. Some days I missed it. He noticed. So I built a bot that replies for me, once a day, however he phrased it.",
-    highlight: {
-      title: "the machinery",
-      description:
-        "Gemini 2.5 Flash Lite classifies each message in ~400ms; a Unicode regex covers API blips. Runs 24/7 on a GCP e2-micro free tier, systemd + cgroup caps holding Chromium under a gigabyte. $0/month.",
-    },
-    stack: ["node.js", "gemini-2.5", "puppeteer", "systemd", "gcp"],
-    hasPreview: "whatsapp",
-    featuredLink: { label: "github", href: "https://github.com/RutvikGupta/dad-bot" },
-    theme: { accent: "#9cc36b", command: "dadbot --watch" },
-  },
-
-  // 3. LYRA — personal project (2026)
+  // 2. LYRA — personal project (2026)
   {
     slug: "lyra",
     kind: "project",
@@ -101,6 +80,27 @@ export const journey: JourneyItem[] = [
     hasPreview: "lyra",
     featuredLink: { label: "live", href: "https://lyra00.vercel.app" },
     theme: { accent: "#e892b8", command: "lyra --listen" },
+  },
+
+  // 3. DAD BOT — personal project (2026)
+  {
+    slug: "dad-bot",
+    kind: "project",
+    dates: "2026 · weekend",
+    title: "Dad Bot",
+    org: "Personal project",
+    orgUrl: "https://github.com/RutvikGupta/dad-bot",
+    blurb:
+      "My dad texts me “good morning” every day — English, Hindi, sometimes a sunrise emoji. Some days I missed it. He noticed. So I built a bot that replies for me, once a day, however he phrased it.",
+    highlight: {
+      title: "the machinery",
+      description:
+        "Gemini 2.5 Flash Lite classifies each message in ~400ms; a Unicode regex covers API blips. Runs 24/7 on a GCP e2-micro free tier, systemd + cgroup caps holding Chromium under a gigabyte. $0/month.",
+    },
+    stack: ["node.js", "gemini-2.5", "puppeteer", "systemd", "gcp"],
+    hasPreview: "whatsapp",
+    featuredLink: { label: "github", href: "https://github.com/RutvikGupta/dad-bot" },
+    theme: { accent: "#9cc36b", command: "dadbot --watch" },
   },
 
   // 4. DRAFTKINGS
@@ -124,7 +124,7 @@ export const journey: JourneyItem[] = [
     theme: { accent: "#7fd47e", command: "payments --process" },
   },
 
-  // 4. HUAWEI — SMARTS open source
+  // 5. HUAWEI — SMARTS open source
   {
     slug: "huawei",
     kind: "role",
@@ -141,7 +141,7 @@ export const journey: JourneyItem[] = [
     theme: { accent: "#74c6ff", command: "smarts --simulate" },
   },
 
-  // 5. TD BANK
+  // 6. TD BANK
   {
     slug: "td",
     kind: "role",
@@ -157,7 +157,7 @@ export const journey: JourneyItem[] = [
     theme: { accent: "#73c7aa", command: "status --tail" },
   },
 
-  // 6. UTSC CAP LAB
+  // 7. UTSC CAP LAB
   {
     slug: "utsc",
     kind: "role",
