@@ -118,7 +118,7 @@ export function JourneyEntry({
 
       <div className="relative grid gap-10 lg:grid-cols-[minmax(320px,0.92fr)_1fr] lg:gap-14">
         <div
-          className={`transition-opacity duration-700 lg:sticky lg:top-28 lg:self-start ${
+          className={`transition-opacity duration-700 lg:sticky lg:top-28 lg:self-start lg:pt-14 ${
             isActive ? "opacity-100" : "opacity-85"
           }`}
         >
