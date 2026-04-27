@@ -52,9 +52,6 @@ const REPLY_H = 44;
 const REPLY_RIGHT = 304 - 14; // right edge of reply bubble in viewBox units
 const REPLY_PAD_X = 14;
 
-// Once/day anchor
-const ANCHOR_W = 120;
-
 // Conservative fallbacks used for the very first paint.
 const FB_IN = [40, 140, 112, 82];
 const FB_CHIP = [80, 104, 156, 130];
@@ -284,28 +281,6 @@ export function WhatsAppPreview() {
           </text>
         </g>
 
-        {/* once/day anchor */}
-        <rect
-          x="26"
-          y="168"
-          width={ANCHOR_W}
-          height="14"
-          rx="7"
-          fill="rgba(255,255,255,0.04)"
-          stroke="rgba(255,255,255,0.1)"
-        />
-        <text
-          x={26 + ANCHOR_W / 2}
-          y="175"
-          textAnchor="middle"
-          dominantBaseline="central"
-          fontFamily="ui-monospace, monospace"
-          fontSize="7.5"
-          letterSpacing="0.16em"
-          fill="rgba(239,242,255,0.62)"
-        >
-          ONCE / DAY · LOCKED
-        </text>
       </svg>
     </div>
   );
