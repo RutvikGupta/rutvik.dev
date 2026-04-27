@@ -95,7 +95,7 @@ export function JourneyEntry({
       id={item.slug}
       ref={ref}
       data-active={isActive ? "true" : "false"}
-      className="journey-card group relative overflow-hidden rounded-[28px] border border-white/10 p-5 md:rounded-[36px] md:p-8 lg:min-h-[82vh] lg:p-10"
+      className="journey-card group relative overflow-hidden rounded-[28px] border border-white/10 p-5 md:rounded-[36px] md:p-8 lg:p-10"
       style={{
         opacity: hasRevealed ? (isActive ? 1 : 0.95) : 0,
         transform: hasRevealed ? "translateY(0)" : "translateY(48px)",
